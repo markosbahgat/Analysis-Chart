@@ -5,13 +5,16 @@ import store from 'store';
 import App from './App';
 import './index.scss';
 import './i18n';
+import { BrowserRouter } from 'react-router-dom';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
 root.render(
-    <Provider store={store}>
-      <App />
-    </Provider>
+  <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+  </Provider>
 );
 

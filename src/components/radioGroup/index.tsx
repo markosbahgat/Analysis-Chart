@@ -1,37 +1,84 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { IData, IFilters } from 'models';
+import { RadioGroup } from '@headlessui/react'
 
 interface Props {
-    item: IData,
+    data: IData[],
     filters: IFilters,
-    handleChange:(value:string) => void,
+    handleChange: (item: IData) => void,
 }
-
-const RadioGroup:React.FC<Props> = ({item, filters, handleChange}) => {
+const CheckIcon = (props:{className:string}) => {
     return (
-        <div key={item.id} className="relative flex items-start p-3">
-            <div className="flex items-center h-5">
-                <input
-                    id={item.id}
-                    aria-describedby={`${item.id}-description`}
-                    name="school"
-                    type="radio"
-                    defaultChecked={item.school === filters.school}
-                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                    value={item.school}
-                    onChange={() => handleChange(item.school)}
-                />
-            </div>
-            <div className="ml-3 text-sm">
-                <label htmlFor={item.id} className="font-medium text-gray-700">
-                    {item.lessons} Lessons in
-                </label>
-                <p id={`${item.id}-description`} className="text-gray-500">
-                    {item.school}
-                </p>
-            </div>
-        </div>
+      <svg viewBox="0 0 24 24" fill="none" {...props}>
+        <circle cx={12} cy={12} r={12} fill="#fff" opacity="0.2" />
+        <path
+          d="M7 13l3 3 7-7"
+          stroke="#fff"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    )
+  }
+
+const RadioButton: React.FC<Props> = ({ data, filters, handleChange }) => {
+    const [selected, setSelected] = useState<string>('');
+    
+    return (
+        <RadioGroup value={selected} onChange={setSelected}   className="relative flex flex-col gap-5 p-3">
+            {
+                data.map((item) => (
+                  
+                        <RadioGroup.Option 
+                        value={item.school} key={item.id} onClick={() => handleChange(item)}   className={({ active, checked }) =>
+                            `${
+                            active
+                                ? `ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300`
+                                : ''
+                            }
+                            ${
+                            checked ? `bg-sky-900 bg-opacity-75 text-white` : 'bg-white'
+                            }
+                            relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
+                        }>
+                            {({ checked }) => (
+                            <>
+                                <div className="flex w-full items-center justify-between">
+                                <div className="flex items-center">
+                                    <div className="text-sm">
+                                    <RadioGroup.Label
+                                        as="p"
+                                        className={`font-medium  ${
+                                        checked ? 'text-white' : 'text-gray-900'
+                                        }`}
+                                    >
+                                        {item.lessons} Lessons 
+                                    </RadioGroup.Label>
+                                    <RadioGroup.Description
+                                        as="span"
+                                        className={`inline ${
+                                        checked ? 'text-sky-100' : 'text-gray-500'
+                                        }`}
+                                    >
+                                        <span>
+                                        in {item.school}
+                                        </span>{' '}
+                                    </RadioGroup.Description>
+                                    </div>
+                                </div>
+                                {checked && (
+                                    <div className="shrink-0 text-white">
+                                    <CheckIcon className="h-6 w-6" />
+                                    </div>
+                                )}
+                                </div>
+                            </>
+                            )}
+                        </RadioGroup.Option>
+              ))}
+            </RadioGroup>
     )
 }
 
-export default RadioGroup
+export default RadioButton

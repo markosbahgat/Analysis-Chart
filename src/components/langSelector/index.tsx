@@ -1,9 +1,9 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
 
-type Props = {}
+interface Props {}
 
-const LangSwitcher = (props: Props) => {
+const LangSwitcher:React.FC<Props> = () => {
     const { i18n } = useTranslation();
     return (
       <>

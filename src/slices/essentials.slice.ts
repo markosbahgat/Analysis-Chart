@@ -1,15 +1,15 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store/rootReducer";
 
 interface Essentials_State {
 	boxModel: boolean;
-	darkMode: boolean;
+	isDarkModeOn: boolean;
 	lang: string;
 }
 
 const initialState: Essentials_State = {
 	boxModel: false,
-	darkMode: false,
+	isDarkModeOn: false,
 	lang: 'ar',
 };
 
@@ -21,11 +21,11 @@ const essentialSlice = createSlice({
 			console.log(payload);
 			state.boxModel = payload;
 		},
-		showDarkMode: (state:Essentials_State, {payload}:PayloadAction<boolean>) => {
-			state.darkMode = payload;
+		darkMode: (state: Essentials_State) => {
+			state.isDarkModeOn = !state.isDarkModeOn;
 		},
 	},
 });
-export const { showModel, showDarkMode } = essentialSlice.actions;
+export const { showModel, darkMode } = essentialSlice.actions;
 export const essentialState = (state: RootState) => state.essential;
 export default essentialSlice.reducer;

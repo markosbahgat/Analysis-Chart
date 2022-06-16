@@ -1,16 +1,22 @@
 import { useState } from 'react'
 import { Switch } from '@headlessui/react'
 import { classNames } from 'shared';
-interface Props { }
+interface Props { 
+    themeChanger:() => void,
+}
 
-const Toggle = (props: Props) => {
+const Toggle:React.FC<Props> = ({themeChanger}) => {
     const [enabled, setEnabled] = useState(false);
+    const handleChange = () => {
+        themeChanger();
+        setEnabled(enabled  => !enabled)
+    }
     return (
         <div className='flex flex-row items-center justify-between gap-3'>
             {enabled ? "Dark Mode" : "Light Mode"}
             <Switch
                 checked={enabled}
-                onChange={() => setEnabled(enabled  => !enabled)}
+                onChange={handleChange}
                 className="flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
                 <span className="sr-only">Use setting</span>

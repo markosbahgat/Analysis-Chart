@@ -15,7 +15,7 @@ import { SearchIcon } from '@heroicons/react/solid'
 import { ReactNode } from 'react'
 import Toggle from 'components/toggle'
 import LangSwitcher from 'components/langSelector'
-
+import Logo from 'assets/images/pic.jpg';
 
 
 const navigation = [
@@ -27,25 +27,35 @@ const navigation = [
     { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
 ]
 const userNavigation = [
-    { name: 'Your Profile', href: '#' },
-    { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '#' },
+    { name: 'Your Profile', href: '/profile' },
+    { name: 'Settings', href: '/settings' },
+    { name: 'Sign out', href: 'SignIn' },
 ]
 
 type Props = {
     setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>,
     sidebarOpen: boolean,
-    children: ReactNode
+    children: ReactNode,
+    themeChanger: () => void,
+    isDarkModeOn: boolean,
 }
 
-const Dashboard: React.FC<Props> = ({ children, sidebarOpen, setSidebarOpen }) => {
+const Dashboard: React.FC<Props> = ({ children, sidebarOpen, setSidebarOpen, themeChanger, isDarkModeOn }) => {
+    const darkModeClasses = (dark:string, light:string) => {
+        if (isDarkModeOn) return dark;
+        else return light;
+    }
+    const currentItemClasses = (current:boolean ,trueClasses:string, falseClasses:string) => {
+        if (current) return trueClasses;
+        else return falseClasses;
+    } 
     return (
         <>
-            <Dialog as="div" className="relative z-40 md:hidden" open={sidebarOpen} onClose={() => setSidebarOpen(!sidebarOpen)}>
+            <Dialog as="div" className="relative z-40 md:hidden " open={sidebarOpen} onClose={() => setSidebarOpen(!sidebarOpen)}>
                 <div className="fixed inset-0 bg-gray-600 bg-opacity-75" />
 
                 <div className="fixed inset-0 flex z-40">
-                    <Dialog.Panel className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white">
+                    <Dialog.Panel className={classNames(isDarkModeOn ? 'bg-gray-400' : " bg-white","relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4")}>
                         <div className="absolute top-0 right-0 -mr-12 pt-2">
                             <button
                                 type="button"
@@ -70,11 +80,8 @@ const Dashboard: React.FC<Props> = ({ children, sidebarOpen, setSidebarOpen }) =
                                         key={item.name}
                                         href={item.href}
                                         className={classNames(
-                                            item.current
-                                                ? 'bg-gray-100 text-gray-900'
-                                                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                                            'group flex items-center px-2 py-2 text-base font-medium rounded-md'
-                                        )}
+                                            darkModeClasses(currentItemClasses(item.current, 'bg-gray-900 text-white', 'text-gray-300 hover:bg-gray-700 hover:text-white'), currentItemClasses(item.current, 'bg-gray-100 text-gray-900', 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'))
+                                            ,'group flex items-center px-2 py-2 text-base font-medium rounded-md')}
                                     >
                                         <item.icon
                                             className={classNames(
@@ -90,14 +97,14 @@ const Dashboard: React.FC<Props> = ({ children, sidebarOpen, setSidebarOpen }) =
                         </div>
                     </Dialog.Panel>
                     {/* Dummy element to force sidebar to shrink to fit close icon */}
-                    <div className="flex-shrink-0 w-14" aria-hidden="true"/>
+                    <div className="flex-shrink-0 w-14" aria-hidden="true" />
                 </div>
             </Dialog>
 
             {/* Static sidebar for desktop */}
             <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto">
+                <div className={classNames(isDarkModeOn?'bg-gray-400': "bg-white","flex flex-col flex-grow border-r border-gray-200 pt-5 overflow-y-auto")}>
                     <div className="flex items-center flex-shrink-0 px-4">
                         <img
                             className="h-8 w-auto"
@@ -131,7 +138,9 @@ const Dashboard: React.FC<Props> = ({ children, sidebarOpen, setSidebarOpen }) =
                 </div>
             </div>
             <div className="md:pl-64 flex flex-col flex-1">
-                <div className="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">
+                <div className={classNames(
+                    isDarkModeOn ? "sticky top-0 z-10 flex-shrink-0 flex h-16 bg-gray-400 shadow" : "sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow"
+                )}>
                     <button
                         type="button"
                         className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
@@ -148,11 +157,11 @@ const Dashboard: React.FC<Props> = ({ children, sidebarOpen, setSidebarOpen }) =
                                 </label>
                                 <div className="relative w-full text-gray-400 focus-within:text-gray-600">
                                     <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
-                                        <SearchIcon className="h-5 w-5" aria-hidden="true" />
+                                        <SearchIcon className="h-5 w-5 mx-5" aria-hidden="true" />
                                     </div>
                                     <input
                                         id="search-field"
-                                        className="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
+                                        className="block w-full rounded-lg h-full pl-12 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
                                         placeholder="Search"
                                         type="search"
                                         name="search"
@@ -161,8 +170,8 @@ const Dashboard: React.FC<Props> = ({ children, sidebarOpen, setSidebarOpen }) =
                             </form>
                         </div>
                         <div className="ml-4 flex items-center md:ml-6 gap-6">
-                            <LangSwitcher/>
-                            <Toggle/>
+                            <LangSwitcher />
+                            <Toggle themeChanger={themeChanger} />
                             <button
                                 type="button"
                                 className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -178,7 +187,7 @@ const Dashboard: React.FC<Props> = ({ children, sidebarOpen, setSidebarOpen }) =
                                         <span className="sr-only">Open user menu</span>
                                         <img
                                             className="h-8 w-8 rounded-full"
-                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                            src={Logo}
                                             alt=""
                                         />
                                     </Menu.Button>
@@ -193,6 +202,7 @@ const Dashboard: React.FC<Props> = ({ children, sidebarOpen, setSidebarOpen }) =
                                                         active ? 'bg-gray-100' : '',
                                                         'block px-4 py-2 text-sm text-gray-700'
                                                     )}
+                                                    onClick={() => item.href === 'SignIn' && localStorage.removeItem('token')}
                                                 >
                                                     {item.name}
                                                 </a>
@@ -204,7 +214,7 @@ const Dashboard: React.FC<Props> = ({ children, sidebarOpen, setSidebarOpen }) =
                         </div>
                     </div>
                 </div>
-                <main className="flex-1">
+                <main className={classNames(isDarkModeOn ? "bg-gray-400" : "bg-white","h-[100vh] flex-1")}>
                     {children}
                 </main>
             </div>

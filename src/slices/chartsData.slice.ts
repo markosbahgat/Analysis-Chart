@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "store/rootReducer";
-import { IData } from "models";
+import { IData, IDataSets } from "models";
 import GetChartsData from 'middlewares/getChartData.middleware';
 
 
@@ -12,7 +12,8 @@ interface ChartDataState {
         country: string | null,
         camp: string | null,
         school:string | null,
-    }
+    },
+    chartDataSets: IDataSets[],
 }
 
 const initialState: ChartDataState = {
@@ -20,10 +21,11 @@ const initialState: ChartDataState = {
     Loading: false,
     errorMessage: null,
     filters: {
-        country: null,
-        camp: null,
+        country: "Kenya",
+        camp: "Kakuma",
         school:null
-    }
+    },
+    chartDataSets:[]
 };
 
 const chartDataSlice = createSlice({
@@ -45,6 +47,17 @@ const chartDataSlice = createSlice({
                 default:
                     return state
             }
+        },
+        appendDataSets: (state: ChartDataState, { payload }: PayloadAction<IDataSets>) => {
+            // console.log(state.chartDataSets.length);
+            // state.chartDataSets.length === 0 ?
+            //     state.chartDataSets.push(payload) :
+            //     state.chartDataSets.forEach(item => {
+            //         // console.log(item.label === payload.label);
+            //         // if (item.label === payload.label) console.log(item.label === payload.label)
+            //         // else state.chartDataSets.push(payload);
+            //     });
+            if (!state.chartDataSets.find(item => item.label === payload.label)) state.chartDataSets.push(payload);
         }
     },
     extraReducers: (builder) => {
@@ -53,7 +66,7 @@ const chartDataSlice = createSlice({
             
         });
         builder.addCase(GetChartsData.fulfilled, (state, {payload} :PayloadAction<IData[]>) => {
-			state.allData = payload;
+            state.allData = payload;
             state.Loading = false;
             
 		});
@@ -65,4 +78,4 @@ const chartDataSlice = createSlice({
 });
 export default chartDataSlice.reducer;
 export const chartState = (state: RootState) => state.chartData;
-export const { setFilters } = chartDataSlice.actions;
+export const { setFilters, appendDataSets } = chartDataSlice.actions;

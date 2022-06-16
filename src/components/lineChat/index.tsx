@@ -1,6 +1,12 @@
-import React from 'react'
-import { Line } from 'react-chartjs-2'
+import React, { MouseEvent, useRef } from 'react';
+import { Line } from 'react-chartjs-2';
+import type { InteractionItem } from 'chart.js';
 import Chart from 'chart.js/auto';
+import {
+  getDatasetAtEvent,
+  getElementAtEvent,
+  getElementsAtEvent,
+} from 'react-chartjs-2';
 import { CategoryScale,
   LinearScale,
   PointElement,
@@ -8,33 +14,22 @@ import { CategoryScale,
   Title,
   Tooltip,
   Legend, } from 'chart.js'; 
-import { IData, IFilters } from 'models';
+import { IDataSets } from 'models';
 
 interface Props {
-  chartData: IData[],
-  filters: IFilters,
+  chartLabels: string[],
+  dataSets:IDataSets[]
 }
-const LineChart:React.FC<Props> = ({chartData, filters}) => {
+const LineChart: React.FC<Props> = ({ chartLabels, dataSets }) => {
+  console.log(dataSets);
+  
   Chart.register(CategoryScale, LinearScale,
     PointElement,
     LineElement,
     Title,
     Tooltip,
     Legend);
-  const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec"
-  ];
+
   const options = {
     responsive: true,
     plugins: {
@@ -43,20 +38,21 @@ const LineChart:React.FC<Props> = ({chartData, filters}) => {
       },
       title: {
         display: true,
-        text: 'Markos Bahgat'
+        text: 'No.of lessons'
       }
     }
   };
-  const data = {
-    labels: [...new Set(chartData.map((item:IData) => item.month))].sort((prevMonth, nextMonth) => monthNames.indexOf(prevMonth) - monthNames.indexOf(nextMonth)),
-    datasets: [{
-      label: 'No.of Lessons',
-      data: chartData.filter(item => filters.school ? item.school === filters.school : item).map((item: IData) => item.lessons),
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    }]
+  if (dataSets) {
+    return (
+      <div className='w-9/12'>
+        <Line datasetIdKey='id' data={{
+      labels: chartLabels,
+      datasets: dataSets
+        }} options={options} />
+      </div>);
+    
   }
-  return <div className='w-9/12'><Line  datasetIdKey='id' data={data} options={options} /></div>;
+  else return <div>loading.....</div>;
 }
 
 export default LineChart;
