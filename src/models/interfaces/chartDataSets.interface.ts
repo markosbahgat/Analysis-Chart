@@ -1,10 +1,13 @@
-import { IData } from "./chartsData.interface";
-
 export interface IDataSets {
-    label: string,
-    data: number[],
-    borderColor: string,
-    fill: boolean,
-    borderWidth:number
-    backgroundColor:string,
+	id: string;
+	dataSets: {
+		label: string;
+		data: number[];
+		borderColor: string;
+		fill: boolean;
+		borderWidth: number;
+		hoverRadius?: number;
+		radius?: number;
+		backgroundColor: string;
+	};
 }

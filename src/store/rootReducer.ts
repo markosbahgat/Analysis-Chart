@@ -1,7 +1,5 @@
-import { combineReducers } from "@reduxjs/toolkit";
-import { essentialReducer, chartDataReducer } from "slices";
-
-
+import { combineReducers } from '@reduxjs/toolkit';
+import { essentialReducer, chartDataReducer } from 'slices';
 
 const rootReducer = combineReducers({
 	chartData: chartDataReducer,

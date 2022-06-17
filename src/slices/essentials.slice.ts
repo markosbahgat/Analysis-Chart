@@ -1,31 +1,33 @@
-import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../store/rootReducer";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from 'store/rootReducer';
 
 interface Essentials_State {
-	boxModel: boolean;
+	isSideBarOpen: boolean;
 	isDarkModeOn: boolean;
 	lang: string;
 }
 
 const initialState: Essentials_State = {
-	boxModel: false,
+	isSideBarOpen: false,
 	isDarkModeOn: false,
-	lang: 'ar',
+	lang: 'en',
 };
 
 const essentialSlice = createSlice({
-	name: "essential",
+	name: 'essential',
 	initialState,
 	reducers: {
-		showModel: (state:Essentials_State, {payload} :PayloadAction<boolean>) => {
-			console.log(payload);
-			state.boxModel = payload;
+		showSidebar: (state: Essentials_State) => {
+			state.isSideBarOpen = !state.isSideBarOpen;
 		},
 		darkMode: (state: Essentials_State) => {
 			state.isDarkModeOn = !state.isDarkModeOn;
 		},
+		changeLang: (state: Essentials_State, { payload }: PayloadAction<string>) => {
+			state.lang = payload.toLowerCase();
+		},
 	},
 });
-export const { showModel, darkMode } = essentialSlice.actions;
+export const { showSidebar, darkMode, changeLang } = essentialSlice.actions;
 export const essentialState = (state: RootState) => state.essential;
 export default essentialSlice.reducer;
