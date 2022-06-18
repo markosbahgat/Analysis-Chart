@@ -3,28 +3,14 @@ import GetChartsData from 'middlewares/getChartData.middleware';
 import rootReducer from './rootReducer';
 import { fetchParams } from 'models/enums/fetchParams.enums';
 import { appendDataSets } from 'slices';
-
+import { dummyDataSet } from 'shared';
 
 const store = configureStore({
 	reducer: rootReducer,
 });
 
 store.dispatch(GetChartsData(fetchParams));
-store.dispatch(
-	appendDataSets({
-		id: Date.now().toLocaleString(),
-		dataSets: {
-			label: 'Testing School',
-			data: [200, 150, 100, 230, 40, 90, 150, 80, 180, 260, 200, 100],
-			borderColor: 'rgb(53, 162, 235)',
-			fill: false,
-			borderWidth: 3,
-			hoverRadius: 10,
-			radius: 5,
-			backgroundColor: 'transparent',
-		},
-	})
-);
+store.dispatch(appendDataSets(dummyDataSet));
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

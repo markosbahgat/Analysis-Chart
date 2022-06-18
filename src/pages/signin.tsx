@@ -1,7 +1,9 @@
 import React from 'react';
-import { SignInHoc } from "HOCs";
+import { SignInHoc } from 'HOCs';
 
- const SignIn = () => {
-	 return (<SignInHoc />);
-}
+interface Props {}
+
+const SignIn: React.FC<Props> = () => {
+	return <SignInHoc />;
+};
 export default SignIn;

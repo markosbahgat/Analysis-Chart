@@ -6,7 +6,7 @@ interface Props {
 }
 
 const Toggle: React.FC<Props> = ({ themeChanger }) => {
-	const [enabled, setEnabled] = useState(false);
+	const [enabled, setEnabled] = useState<boolean>(false);
 	const handleChange = () => {
 		themeChanger();
 		setEnabled((enabled) => !enabled);

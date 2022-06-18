@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
-type Props = {};
+interface Props {}
 
-const SignInHoc = (props: Props) => {
+const SignInHoc: React.FC<Props> = () => {
 	const [isLoading, setLoading] = useState<boolean>(false);
 	const nav = useNavigate();
 	const {

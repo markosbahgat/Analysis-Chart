@@ -2,30 +2,20 @@ import { Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import { classNames } from 'shared';
-import { useAppDispatch } from 'store/hooks';
-import { setFilters } from 'slices';
-import { useTranslation } from 'react-i18next';
+import { TFunction } from 'react-i18next';
 
 interface Props {
 	data: string[];
 	label: string;
 	type: string;
 	selected: string | null;
+	handleChangeSelection: (item: string, type: string) => void;
+	t: TFunction<'translation', undefined>;
 }
 
-const DropDown: React.FC<Props> = ({ data, type, label, selected }) => {
-	const dispatch = useAppDispatch();
-	const { t } = useTranslation();
-	const handleChangeSelection = (item: string) => {
-		if (item === 'Show All') {
-			dispatch(setFilters({ key: type, value: null }));
-		} else {
-			dispatch(setFilters({ key: type, value: item }));
-		}
-	};
-
+const DropDown: React.FC<Props> = ({ data, type, label, selected, handleChangeSelection, t }) => {
 	return (
-		<Listbox value={selected} onChange={handleChangeSelection}>
+		<Listbox value={selected} onChange={() => null}>
 			{({ open }) => (
 				<div className='flex flex-col gap-3'>
 					<Listbox.Label className='block text-sm font-medium text-gray-700'>{t(label)}</Listbox.Label>
@@ -49,7 +39,7 @@ const DropDown: React.FC<Props> = ({ data, type, label, selected }) => {
 								{data.map((item: string) => (
 									<Listbox.Option
 										key={item}
-										onClick={() => handleChangeSelection(item)}
+										onClick={() => handleChangeSelection(item, type)}
 										className={({ active }) =>
 											classNames(
 												active ? 'text-white bg-indigo-600' : 'text-gray-900',

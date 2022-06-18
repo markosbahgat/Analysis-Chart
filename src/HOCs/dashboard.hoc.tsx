@@ -1,36 +1,33 @@
 import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { useAppDispatch } from 'store/hooks';
 import { useTranslation } from 'react-i18next';
-import { essentialState, darkMode, showSidebar, chartState, appendDataSets } from 'slices';
+import { appendDataSets, setFilters } from 'slices';
 import { IData } from 'models';
 import { useNavigate } from 'react-router-dom';
-import useLang, { colorArray } from 'shared';
+import { colorArray, monthNames } from 'shared';
 import { DropDown, LineChart, Layout, RadioButton } from 'components';
+import { useLang, useLocal, useEssential } from 'hooks';
+import useStates from 'hooks/states.hook';
 
-type Props = {};
+interface Props {}
 
 const DashboardHOC: React.FC<Props> = () => {
-	const chLang = useLang();
-	const state = useAppSelector(chartState);
 	let campLessons: number = 0;
-	const filter = localStorage.getItem('filters') ? JSON.parse(localStorage.getItem('filters') ?? '') : state.filters;
-	const schoolList = [
-		...state.allData
-			.filter((item) => item.country === filter.country)
-			.filter((item) => item.camp === filter.camp)
-			.filter((item) => (state.filters.school ? item.school === state.filters.school : item)),
-	];
-	schoolList.map((item) => (campLessons += item.lessons));
-	const essentialsState = useAppSelector(essentialState);
+	const { chartState, essentialState } = useStates();
+	const { themeChanger, handleSideBar } = useEssential();
+	const { schoolList, filter } = useLocal();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+	const chLang = useLang();
+	schoolList.map((item) => (campLessons += item.lessons));
+
 	const handleChange = (item: IData) => {
 		dispatch(
 			appendDataSets({
 				id: item.id,
 				dataSets: {
 					label: item.school,
-					data: [...state.allData.filter((filItem) => filItem.school === item.school)].map(
+					data: [...chartState.allData.filter((filItem) => filItem.school === item.school)].map(
 						(lesson) => lesson.lessons
 					),
 					borderColor: colorArray[Math.floor(Math.random() * colorArray.length)],
@@ -43,55 +40,67 @@ const DashboardHOC: React.FC<Props> = () => {
 			})
 		);
 	};
-	const themeChanger = () => {
-		dispatch(darkMode());
-	};
-	const handleSideBar = () => {
-		dispatch(showSidebar());
-	};
-	const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-	const handleClick = (name: string, value: number, month: string) => {
-		const target = state.allData.find((item) => item.school === name && item.lessons === value);
+
+	const handleClick = (name: string, value: number) => {
+		const target = chartState.allData.find((item) => item.school === name && item.lessons === value);
 		navigate('/' + target?.id);
 	};
 	const { t } = useTranslation();
-
+	const handleChangeSelection = (item: string, type: string) => {
+		if (item === 'Show All') {
+			dispatch(setFilters({ key: type, value: null }));
+		} else {
+			dispatch(setFilters({ key: type, value: item }));
+		}
+	};
 	useEffect(() => {
-		chLang(localStorage.getItem('Lang') ?? essentialsState.lang);
-	}, []);
+		chLang(localStorage.getItem('Lang') ?? essentialState.lang);
+	}, [chLang, essentialState.lang]);
 	return (
 		<Layout
-			isSideBarOpen={essentialsState.isSideBarOpen}
+			isSideBarOpen={essentialState.isSideBarOpen}
 			handleSideBar={handleSideBar}
 			themeChanger={themeChanger}
-			isDarkModeOn={essentialsState?.isDarkModeOn}>
+			isDarkModeOn={essentialState?.isDarkModeOn}>
 			<div className='py-6 h-[calc(100vh-4rem)]'>
 				<div className='max-w-7xl mb-10 mx-auto px-4 sm:px-6 md:px-8'>
-					<h2 className='text-2xl text-purple-500'>{t('Analysis Chart')}</h2>
+					<h2 className='text-2xl text-purple-500' data-testingId='Header'>
+						{t('Analysis Chart')}
+					</h2>
 					<h3 className='text-2xl mt-10 text-purple-500'>{t('Number Of Lessons')}</h3>
 				</div>
 				<div className='flex flex-row items-center justify-center gap-10 flex-wrap'>
 					<DropDown
-						data={[...new Set(state.allData.map((item) => item.country))]}
+						data={[...new Set(chartState.allData.map((item) => item.country))]}
 						type='country'
 						selected={filter.country}
 						label='Select Country'
+						handleChangeSelection={handleChangeSelection}
+						t={t}
 					/>
 					<DropDown
-						data={[...new Set(state.allData.map((item) => item.camp))]}
+						data={[...new Set(chartState.allData.map((item) => item.camp))]}
 						type='camp'
 						selected={filter.camp}
 						label='Select Camp'
+						handleChangeSelection={handleChangeSelection}
+						t={t}
 					/>
 					<DropDown
-						data={['Show All', ...new Set(state.allData.map((item) => item.school))]}
+						data={['Show All', ...new Set(chartState.allData.map((item) => item.school))]}
 						type='school'
 						selected={filter.school}
 						label='Select School'
+						handleChangeSelection={handleChangeSelection}
+						t={t}
 					/>
 				</div>
 				<div className='flex xl:flex-row flex-col-reverse items-center justify-between xl:max-w-8xl mt-10 mx-auto px-4 sm:px-6 md:px-8'>
-					<LineChart chartLabels={monthNames} dataChart={state.chartDataSets} handleClick={handleClick} />
+					<LineChart
+						chartLabels={monthNames}
+						dataChart={chartState.chartDataSets}
+						handleClick={handleClick}
+					/>
 					<hr className='xl:w-[5px] mx-5 xl:h-[55vh] w-11/12 h-[5px] my-10 xl:my-0 bg-gray-300' />
 					<div className='xl:w-3/12'>
 						{campLessons > 0 ? (
@@ -105,7 +114,7 @@ const DashboardHOC: React.FC<Props> = () => {
 							</div>
 						)}
 						<div className='max-h-[50vh] overflow-auto'>
-							<RadioButton data={schoolList} handleChange={handleChange} filters={state.filters} />
+							<RadioButton data={schoolList} handleChange={handleChange} filters={chartState.filters} />
 						</div>
 					</div>
 				</div>

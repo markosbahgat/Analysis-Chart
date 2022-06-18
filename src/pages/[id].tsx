@@ -1,9 +1,10 @@
 import React from 'react';
-import {DetailsHOC} from 'HOCs';
+import { DetailsHOC } from 'HOCs';
 import { useParams } from 'react-router-dom';
-type Props = {};
 
-const School = (props: Props) => {
+interface Props {}
+
+const School: React.FC<Props> = () => {
 	const { id } = useParams<'id'>();
 	return <DetailsHOC id={id} />;
 };

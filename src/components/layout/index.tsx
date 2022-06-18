@@ -1,36 +1,10 @@
-import { classNames } from 'shared';
+import { classNames, currentItemClasses, navigation, userNavigation } from 'shared';
 import { Dialog, Menu } from '@headlessui/react';
-import {
-	BellIcon,
-	CalendarIcon,
-	ChartBarIcon,
-	FolderIcon,
-	HomeIcon,
-	InboxIcon,
-	MenuAlt2Icon,
-	UsersIcon,
-	XIcon,
-} from '@heroicons/react/outline';
-import { SearchIcon } from '@heroicons/react/solid';
+import { BellIcon, MenuAlt2Icon, SearchIcon, XIcon } from '@heroicons/react/outline';
 import { ReactNode } from 'react';
-import Toggle from 'components/toggle';
-import LangSwitcher from 'components/langSelector';
+import { Toggle, LangSwitcher } from 'components';
 import Logo from 'assets/images/pic.jpg';
 import { Link } from 'react-router-dom';
-
-const navigation = [
-	{ name: 'Dashboard', href: '/', icon: HomeIcon, current: true },
-	{ name: 'Details', href: '#', icon: ChartBarIcon, current: false },
-	{ name: 'Team', href: '#', icon: UsersIcon, current: false },
-	{ name: 'Projects', href: '#', icon: FolderIcon, current: false },
-	{ name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-	{ name: 'Documents', href: '#', icon: InboxIcon, current: false },
-];
-const userNavigation = [
-	{ name: 'Your Profile', href: '/profile' },
-	{ name: 'Settings', href: '/settings' },
-	{ name: 'Sign out', href: 'SignIn' },
-];
 
 type Props = {
 	handleSideBar: () => void;
@@ -44,10 +18,6 @@ const Layout: React.FC<Props> = ({ children, isSideBarOpen, handleSideBar, theme
 	const darkModeClasses = (dark: string, light: string) => {
 		if (isDarkModeOn) return dark;
 		else return light;
-	};
-	const currentItemClasses = (current: boolean, trueClasses: string, falseClasses: string) => {
-		if (current) return trueClasses;
-		else return falseClasses;
 	};
 	return (
 		<>
@@ -205,7 +175,9 @@ const Layout: React.FC<Props> = ({ children, isSideBarOpen, handleSideBar, theme
 							{/* Profile dropdown */}
 							<Menu as='div' className='ml-3 relative'>
 								<div>
-									<Menu.Button className='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+									<Menu.Button
+										className='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+										data-testid='menuButton'>
 										<span className='sr-only'>Open user menu</span>
 										<img className='h-8 w-8 rounded-full' src={Logo} alt='' />
 									</Menu.Button>
@@ -233,7 +205,9 @@ const Layout: React.FC<Props> = ({ children, isSideBarOpen, handleSideBar, theme
 						</div>
 					</div>
 				</div>
-				<main className={classNames(isDarkModeOn ? 'bg-gray-400' : 'bg-white', 'h-[100vh] flex-1')}>
+				<main
+					data-testid='main'
+					className={classNames(isDarkModeOn ? 'bg-gray-400' : 'bg-white', 'min-h-[100vh] h-fit flex-1')}>
 					{children}
 				</main>
 			</div>

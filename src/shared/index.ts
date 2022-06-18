@@ -1,8 +1,7 @@
-import { useTranslation } from 'react-i18next';
-import { changeLang } from 'slices';
-import { useAppDispatch } from 'store/hooks';
+import { CalendarIcon, ChartBarIcon, FolderIcon, HomeIcon, InboxIcon, UsersIcon } from '@heroicons/react/outline';
+export const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-export function classNames(...classes: any[]) {
+export function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(' ');
 }
 export const colorArray = [
@@ -58,15 +57,50 @@ export const colorArray = [
 	'#6666FF',
 ];
 
-const useLang = () => {
-	const { i18n } = useTranslation();
-	const dispatch = useAppDispatch();
-	const chLang = (value: string) => {
-		i18n.changeLanguage(value.toLowerCase());
-		localStorage.setItem('Lang', value);
-		dispatch(changeLang(value));
-	};
-	return chLang;
+export const flagIdentifier = (value: string) => {
+	switch (value) {
+		case 'Egypt':
+			return '🇪🇬';
+		case 'Kenya':
+			return '🇰🇪';
+		case 'Tunisia':
+			return '🇹🇳';
+		case 'Tanzania':
+			return '🇹🇿';
+		default:
+			break;
+	}
 };
 
-export default useLang;
+export const currentItemClasses = (current: boolean, trueClasses: string, falseClasses: string) => {
+	if (current) return trueClasses;
+	else return falseClasses;
+};
+
+export const navigation = [
+	{ name: 'Dashboard', href: '/', icon: HomeIcon, current: true },
+	{ name: 'Details', href: '#', icon: ChartBarIcon, current: false },
+	{ name: 'Team', href: '#', icon: UsersIcon, current: false },
+	{ name: 'Projects', href: '#', icon: FolderIcon, current: false },
+	{ name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
+	{ name: 'Documents', href: '#', icon: InboxIcon, current: false },
+];
+export const userNavigation = [
+	{ name: 'Your Profile', href: '/profile' },
+	{ name: 'Settings', href: '/settings' },
+	{ name: 'Sign out', href: 'SignIn' },
+];
+
+export const dummyDataSet = {
+	id: Date.now().toLocaleString(),
+	dataSets: {
+		label: 'Testing School',
+		data: [200, 150, 100, 230, 40, 90, 150, 80, 180, 260, 200, 100],
+		borderColor: 'rgb(53, 162, 235)',
+		fill: false,
+		borderWidth: 3,
+		hoverRadius: 10,
+		radius: 5,
+		backgroundColor: 'transparent',
+	},
+};

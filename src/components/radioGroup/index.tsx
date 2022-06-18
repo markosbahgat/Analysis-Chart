@@ -7,7 +7,10 @@ interface Props {
 	filters: IFilters;
 	handleChange: (item: IData) => void;
 }
-const CheckIcon = (props: { className: string }) => {
+interface CheckIconProps {
+	className: string;
+}
+const CheckIcon: React.FC<CheckIconProps> = (props: { className: string }) => {
 	return (
 		<svg viewBox='0 0 24 24' fill='none' {...props}>
 			<circle cx={12} cy={12} r={12} fill='#fff' opacity='0.2' />

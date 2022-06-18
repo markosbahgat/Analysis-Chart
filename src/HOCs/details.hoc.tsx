@@ -1,53 +1,32 @@
 import React from 'react';
-import {Layout} from 'components';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { chartState, darkMode, essentialState, showSidebar } from 'slices';
+import { Layout } from 'components';
 import Error404 from 'pages/404';
 import { Link } from 'react-router-dom';
-import { classNames } from 'shared';
-
+import { classNames, flagIdentifier } from 'shared';
+import useEssential from '../hooks/essential.hook';
+import { useStates } from 'hooks';
 interface Props {
 	id: string | undefined;
 }
 
 const DetailsHOC: React.FC<Props> = ({ id }) => {
-	const dispatch = useAppDispatch();
-	const chartsState = useAppSelector(chartState);
-	const essentialsState = useAppSelector(essentialState);
-	const themeChanger = () => {
-		dispatch(darkMode());
-	};
-	const handleSideBar = () => {
-		dispatch(showSidebar());
-	};
-	const targetSchool = chartsState.allData.find((item) => item.id === id);
-	const flagIdentifier = () => {
-		switch (targetSchool?.country) {
-			case 'Egypt':
-				return '🇪🇬';
-			case 'Kenya':
-				return '🇰🇪';
-			case 'Tunisia':
-				return '🇹🇳';
-			case 'Tanzania':
-				return '🇹🇿';
-			default:
-				break;
-		}
-	};
+	const { chartState, essentialState } = useStates();
+	const { themeChanger, handleSideBar } = useEssential();
+	const targetSchool = chartState.allData.find((item) => item.id === id);
+
 	if (targetSchool) {
-		localStorage.setItem('dataSets', JSON.stringify(chartsState.chartDataSets));
-		localStorage.setItem('filters', JSON.stringify(chartsState.filters));
+		localStorage.setItem('dataSets', JSON.stringify(chartState.chartDataSets));
+		localStorage.setItem('filters', JSON.stringify(chartState.filters));
 		return (
 			<Layout
-				isSideBarOpen={essentialsState.isSideBarOpen}
+				isSideBarOpen={essentialState.isSideBarOpen}
 				handleSideBar={handleSideBar}
 				themeChanger={themeChanger}
-				isDarkModeOn={essentialsState?.isDarkModeOn}>
+				isDarkModeOn={essentialState?.isDarkModeOn}>
 				<div
 					className={classNames(
 						'h-[calc(100vh-4rem)]',
-						essentialsState.isDarkModeOn ? 'bg-gray-400' : 'bg-gray-100'
+						essentialState.isDarkModeOn ? 'bg-gray-400' : 'bg-gray-100'
 					)}>
 					<div className='flex min-h-full items-center justify-center'>
 						<div className='w-[750px] flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24'>
@@ -60,12 +39,13 @@ const DetailsHOC: React.FC<Props> = ({ id }) => {
 									</Link>
 									<Link
 										to='/'
+										data-testid='schoolName'
 										className='font-extrabold text-gray-900 text-4xl uppercase text-center mt-20'>
 										{targetSchool.school}
 									</Link>
 									<h2 className='mt-6 text-xl '>School ID : {targetSchool.id}</h2>
 									<p className='mt-2 text-2xl text-gray-600'>
-										Country: {flagIdentifier() + ' ' + targetSchool.country}{' '}
+										Country: {flagIdentifier(targetSchool.country) + ' ' + targetSchool.country}{' '}
 									</p>
 								</div>
 

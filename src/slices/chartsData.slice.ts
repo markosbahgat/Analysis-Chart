@@ -2,11 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store/rootReducer';
 import { IData, IDataSets } from 'models';
 import GetChartsData from 'middlewares/getChartData.middleware';
+import { FetchError } from '../middlewares/getChartData.middleware';
 
 interface ChartDataState {
 	allData: IData[];
 	Loading: boolean;
-	errorMessage: string | null;
+	errorMessage: FetchError | undefined;
 	filters: {
 		country: string | null;
 		camp: string | null;
@@ -18,7 +19,7 @@ interface ChartDataState {
 const initialState: ChartDataState = {
 	allData: [],
 	Loading: false,
-	errorMessage: null,
+	errorMessage: undefined,
 	filters: {
 		country: 'Kenya',
 		camp: 'Kakuma',
@@ -65,8 +66,8 @@ const chartDataSlice = createSlice({
 			state.allData = payload;
 			state.Loading = false;
 		});
-		builder.addCase(GetChartsData.rejected, (state, { payload }: PayloadAction<any>) => {
-			state.errorMessage = payload?.errorMessage;
+		builder.addCase(GetChartsData.rejected, (state, { payload }: PayloadAction<FetchError | undefined>) => {
+			state.errorMessage = payload;
 			state.Loading = false;
 		});
 	},
