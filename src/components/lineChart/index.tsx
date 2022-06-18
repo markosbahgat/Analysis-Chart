@@ -1,8 +1,17 @@
 import React, { MouseEvent, useRef } from 'react';
 import type { InteractionItem } from 'chart.js';
-import { Chart as ChartJS } from 'chart.js';
 import { Chart, getElementAtEvent } from 'react-chartjs-2';
-import { CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import {
+	Chart as ChartJS,
+	CategoryScale,
+	LinearScale,
+	PointElement,
+	LineElement,
+	Title,
+	Tooltip,
+	Legend,
+	LineController,
+} from 'chart.js';
 import { IDataSets } from 'models';
 
 interface Props {
@@ -11,7 +20,7 @@ interface Props {
 	handleClick: (name: string, value: number, month: string) => void;
 }
 const LineChart: React.FC<Props> = ({ chartLabels, dataChart, handleClick }) => {
-	ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+	ChartJS.register(LineController, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 	const chartRef = useRef<ChartJS>(null);
 	const getElementData = (element: InteractionItem[]) => {
 		if (!element.length) return;
