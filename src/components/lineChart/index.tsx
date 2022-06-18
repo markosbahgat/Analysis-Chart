@@ -11,6 +11,7 @@ interface Props {
 	handleClick: (name: string, value: number, month: string) => void;
 }
 const LineChart: React.FC<Props> = ({ chartLabels, dataChart, handleClick }) => {
+	ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 	const chartRef = useRef<ChartJS>(null);
 	const getElementData = (element: InteractionItem[]) => {
 		if (!element.length) return;
@@ -31,7 +32,6 @@ const LineChart: React.FC<Props> = ({ chartLabels, dataChart, handleClick }) => 
 
 		getElementData(getElementAtEvent(chart, event));
 	};
-	ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 	const options = {
 		responsive: true,
