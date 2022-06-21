@@ -1,7 +1,7 @@
-import { useAppSelector } from "store/hooks";
-import { chartState } from "slices/chartsData.slice";
 import { useMemo } from "react";
-import { IData } from "models";
+import { useAppSelector } from "@/store/hooks";
+import { chartState } from "@/slices/index";
+import { IData } from "@/models/index";
 
 const useLocal = () => {
   const state = useAppSelector(chartState);
@@ -17,15 +17,14 @@ const useLocal = () => {
         )
         .filter((item: IData) =>
           state.filters.school ? item.school === state.filters.school : item
-        ),
+        )
     ],
-    [filter, state.allData]
+    [filter, state]
   );
-  console.log(schoolList);
 
   return {
     filter,
-    schoolList,
+    schoolList
   };
 };
 export default useLocal;

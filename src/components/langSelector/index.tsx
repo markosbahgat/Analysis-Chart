@@ -1,7 +1,7 @@
 import React from "react";
-import { useAppSelector } from "store/hooks";
-import { essentialState } from "slices";
-import { useLang } from "hooks";
+import { useAppSelector } from "@/store/hooks";
+import { essentialState } from "@/slices/index";
+import { useLang } from "@/hooks/index";
 
 export default function LangSwitcher() {
   const chLang = useLang();

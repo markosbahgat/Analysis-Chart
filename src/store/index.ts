@@ -1,12 +1,12 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import GetChartsData from "middlewares/getChartData.middleware";
-import { FetchParams } from "models";
-import { appendDataSets } from "slices";
-import { dummyDataSet } from "shared";
+import GetChartsData from "@/middlewares/index";
+import { FetchParams } from "@/models/index";
+import { appendDataSets } from "@/slices/index";
+import { dummyDataSet } from "@/shared";
 import rootReducer from "./rootReducer";
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: rootReducer
 });
 
 store.dispatch(GetChartsData(FetchParams));

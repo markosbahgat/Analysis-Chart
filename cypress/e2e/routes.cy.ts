@@ -18,7 +18,10 @@ export const TestingRoutes = () => {
       cy.get("a[data-testid=gotodashboard]").click();
       cy.url().should("include", "/");
       cy.visit("localhost:3000/620af3a468e4b2e765e7c9e7");
-      cy.get("a[data-testid=schoolName]").should("have.text", "Burke High School");
+      cy.get("a[data-testid=schoolName]").should(
+        "have.text",
+        "Burke High School"
+      );
     });
   });
 };

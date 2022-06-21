@@ -4,19 +4,19 @@ import { initReactI18next } from "react-i18next";
 
 const resources = {
   en: {
-    translation: require("assets/locales/en/common.json"),
+    translation: require("@/assets/locales/en/common.json")
   },
   ar: {
-    translation: require("assets/locales/ar/common.json"),
-  },
+    translation: require("@/assets/locales/ar/common.json")
+  }
 };
 
 i18n.use(initReactI18next).init({
   resources,
   lng: "en",
   interpolation: {
-    escapeValue: false,
-  },
+    escapeValue: false
+  }
 });
 
 export default i18n;

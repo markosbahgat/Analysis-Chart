@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { IData } from "models";
 import { RadioGroup } from "@headlessui/react";
+import { IData } from "@/models/index";
 
 interface Props {
   data: IData[];

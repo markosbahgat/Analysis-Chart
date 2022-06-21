@@ -1,13 +1,14 @@
-import { darkMode } from "slices";
-import { useAppDispatch } from "store/hooks";
+import { useCallback } from "react";
+import { darkMode } from "@/slices/index";
+import { useAppDispatch } from "@/store/hooks";
 
 const useEssential = () => {
   const dispatch = useAppDispatch();
-  const themeChanger = () => {
+  const themeChanger = useCallback(() => {
     dispatch(darkMode());
-  };
+  }, [dispatch]);
   return {
-    themeChanger,
+    themeChanger
   };
 };
 export default useEssential;

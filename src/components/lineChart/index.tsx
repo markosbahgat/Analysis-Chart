@@ -10,9 +10,9 @@ import {
   Title,
   Tooltip,
   Legend,
-  LineController,
+  LineController
 } from "chart.js";
-import { IDataSets } from "models";
+import { IDataSets } from "@/models/index";
 
 interface Props {
   chartLabels: string[];
@@ -22,7 +22,7 @@ interface Props {
 export default function LineChart({
   chartLabels,
   dataChart,
-  handleClick,
+  handleClick
 }: Props) {
   ChartJS.register(
     LineController,
@@ -59,13 +59,13 @@ export default function LineChart({
     responsive: true,
     plugins: {
       Legend: {
-        position: "top" as const,
+        position: "top" as const
       },
       title: {
         display: true,
-        text: "No.of lessons",
-      },
-    },
+        text: "No.of lessons"
+      }
+    }
   };
   if (dataChart) {
     return (
@@ -77,7 +77,7 @@ export default function LineChart({
           options={options}
           data={{
             labels: chartLabels,
-            datasets: dataChart.map((item) => item.dataSets),
+            datasets: dataChart.map((item) => item.dataSets)
           }}
         />
       </div>

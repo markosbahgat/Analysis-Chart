@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IData, IParams } from "models";
 import axios from "axios";
+import { IData, IParams } from "@/models/index";
 
 export interface FetchError {
   errorMessage: string | null;

@@ -1,0 +1,27 @@
+// we also can use these syntax , it will be easier.
+// {
+//   "compilerOptions": {
+//     "baseUrl": "./",
+//     "paths": {
+//      "@shared": ["src/shared"],
+//      "@components": ["src/components"],
+//      "@HOCs": ["src/HOCs"],
+//      "@models": ["src/models"],
+//      "@slices": ["src/slices"],
+//      "@pages/*": ["src/pages/*"],
+//      "@store/*": ["src/store/*"],
+//      "@middlewares": ["src/middlewares"],
+//      "@hooks": ["src/hooks"],
+//      "@styles/*": ["src/styles/*"],
+//      "@assets/*": ["src/assets/*"]
+//     }
+//   }
+// }
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}

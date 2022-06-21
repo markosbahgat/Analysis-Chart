@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
-import { classNames } from "shared";
 import { TFunction } from "react-i18next";
+import { classNames } from "@/shared";
 
 interface Props {
   data: string[];
@@ -19,7 +19,7 @@ export default function DropDown({
   label,
   selected,
   handleChangeSelection,
-  t,
+  t
 }: Props) {
   return (
     <Listbox value={selected} onChange={() => null}>

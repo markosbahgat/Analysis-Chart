@@ -1,9 +1,8 @@
 /* eslint-disable consistent-return */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "store/rootReducer";
-import { IData, IDataSets } from "models";
-import GetChartsData from "middlewares/getChartData.middleware";
-import { FetchError } from "../middlewares/getChartData.middleware";
+import { RootState } from "@/store/rootReducer";
+import { IData, IDataSets } from "@/models/index";
+import GetChartsData, { FetchError } from "@/middlewares/index";
 
 interface ChartDataState {
   allData: IData[];
@@ -24,9 +23,9 @@ const initialState: ChartDataState = {
   filters: {
     country: "Kenya",
     camp: "Kakuma",
-    school: null,
+    school: null
   },
-  chartDataSets: [],
+  chartDataSets: []
 };
 
 const chartDataSlice = createSlice({
@@ -82,7 +81,7 @@ const chartDataSlice = createSlice({
       ) {
         state.chartDataSets.push(payload);
       }
-    },
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(GetChartsData.pending, (state) => {
@@ -102,7 +101,7 @@ const chartDataSlice = createSlice({
         state.Loading = false;
       }
     );
-  },
+  }
 });
 export default chartDataSlice.reducer;
 export const chartState = (state: RootState) => state.chartData;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Switch } from "@headlessui/react";
-import { classNames } from "shared";
+import { classNames } from "@/shared";
 
 interface Props {
   themeChanger: () => void;

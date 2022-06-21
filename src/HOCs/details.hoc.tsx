@@ -1,10 +1,10 @@
 import React from "react";
-import { Layout } from "components";
-import Error404 from "pages/404";
 import { Link } from "react-router-dom";
-import { classNames, flagIdentifier } from "shared";
-import useEssential from "hooks/essential.hook";
-import { useStates } from "hooks";
+import { Layout } from "@/components/index";
+import Error404 from "@/pages/404";
+import { classNames, flagIdentifier } from "@/shared";
+import { useEssential, useStates } from "@/hooks/index";
+import { IData } from "@/models/index";
 
 interface Props {
   id: string | undefined;
@@ -13,7 +13,7 @@ interface Props {
 export default function DetailsHOC({ id }: Props) {
   const { chartState, essentialState } = useStates();
   const { themeChanger } = useEssential();
-  const targetSchool = chartState.allData.find((item) => item.id === id);
+  const targetSchool = chartState.allData.find((item: IData) => item.id === id);
 
   if (targetSchool) {
     localStorage.setItem("dataSets", JSON.stringify(chartState.chartDataSets));

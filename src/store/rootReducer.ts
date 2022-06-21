@@ -1,9 +1,9 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { essentialReducer, chartDataReducer } from "slices";
+import { essentialReducer, chartDataReducer } from "@/slices/index";
 
 const rootReducer = combineReducers({
   chartData: chartDataReducer,
-  essential: essentialReducer,
+  essential: essentialReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import { DashboardHOC } from "HOCs";
-import Error404 from "pages/404";
+import { DashboardHOC } from "@/HOCs/index";
+import Error404 from "@/pages/404";
 import School from "./[id]";
 
 function App() {

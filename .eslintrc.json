@@ -48,7 +48,17 @@
     "prefer-arrow-callback": "off",
     "ignorePropertyModificationsFor": "off",
     "no-param-reassign": 0,
-    "no-console":"off"
+    "no-console": "off",
+    "import/extensions": [
+      "off",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
   },
-  "ignorePatterns": ["/cypress/**/**.{js,ts,tsx,jsx}"]
+  "ignorePatterns": ["/cypress/**/**.{js,ts,tsx,jsx}", "./craco.config.js"]
 }

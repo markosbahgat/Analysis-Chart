@@ -4,7 +4,7 @@ import {
   FolderIcon,
   HomeIcon,
   InboxIcon,
-  UsersIcon,
+  UsersIcon
 } from "@heroicons/react/outline";
 
 export const monthNames = [
@@ -19,7 +19,7 @@ export const monthNames = [
   "Sep",
   "Oct",
   "Nov",
-  "Dec",
+  "Dec"
 ];
 
 export function classNames(...classes: string[]) {
@@ -75,7 +75,7 @@ export const colorArray = [
   "#4DB380",
   "#FF4D4D",
   "#99E6E6",
-  "#6666FF",
+  "#6666FF"
 ];
 
 export const flagIdentifier = (value: string) => {
@@ -107,43 +107,43 @@ export const navigation = [
     name: "Dashboard",
     href: "/",
     icon: HomeIcon,
-    current: true,
+    current: true
   },
   {
     name: "Details",
     href: "#",
     icon: ChartBarIcon,
-    current: false,
+    current: false
   },
   {
     name: "Team",
     href: "#",
     icon: UsersIcon,
-    current: false,
+    current: false
   },
   {
     name: "Projects",
     href: "#",
     icon: FolderIcon,
-    current: false,
+    current: false
   },
   {
     name: "Calendar",
     href: "#",
     icon: CalendarIcon,
-    current: false,
+    current: false
   },
   {
     name: "Documents",
     href: "#",
     icon: InboxIcon,
-    current: false,
-  },
+    current: false
+  }
 ];
 export const userNavigation = [
   { name: "Your Profile", href: "/profile" },
   { name: "Settings", href: "/settings" },
-  { name: "Sign out", href: "SignIn" },
+  { name: "Sign out", href: "SignIn" }
 ];
 
 export const dummyDataSet = {
@@ -156,6 +156,6 @@ export const dummyDataSet = {
     borderWidth: 3,
     hoverRadius: 10,
     radius: 5,
-    backgroundColor: "transparent",
-  },
+    backgroundColor: "transparent"
+  }
 };

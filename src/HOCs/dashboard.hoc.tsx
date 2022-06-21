@@ -1,27 +1,26 @@
 import React, { useEffect } from "react";
-import { useAppDispatch } from "store/hooks";
 import { useTranslation } from "react-i18next";
-import { appendDataSets, setFilters } from "slices";
-import { IData } from "models";
 import { useNavigate } from "react-router-dom";
-import { colorArray, monthNames } from "shared";
-import { DropDown, LineChart, Layout, RadioButton } from "components";
-import { useLang, useLocal, useEssential } from "hooks";
-import useStates from "hooks/states.hook";
+import { useAppDispatch } from "@/store/hooks";
+import { appendDataSets, setFilters } from "@/slices/index";
+import { IData } from "@/models/index";
+import { colorArray, monthNames } from "@/shared";
+import { LineChart, Layout, RadioButton, DropDown } from "@/components/index";
+import { useStates, useLang, useLocal, useEssential } from "@/hooks/index";
 
 export default function DashboardHOC() {
-  // let campLessons: number = 0;
+  let campLessons: number = 0;
   const { chartState, essentialState } = useStates();
   const { themeChanger } = useEssential();
   const { schoolList, filter } = useLocal();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const chLang = useLang();
-  // schoolList.forEach((item) => {
-  //   campLessons += item.lessons;
-  // });
-  // console.log(schoolList);
+  schoolList.forEach((item) => {
+    campLessons += item.lessons;
+  });
 
+  console.log(schoolList);
   const handleChange = (item: IData) => {
     dispatch(
       appendDataSets({
@@ -30,8 +29,8 @@ export default function DashboardHOC() {
           label: item.school,
           data: [
             ...chartState.allData.filter(
-              (filItem) => filItem.school === item.school
-            ),
+              (filItem: IData) => filItem.school === item.school
+            )
           ].map((lesson) => lesson.lessons),
           borderColor:
             colorArray[Math.floor(Math.random() * colorArray.length)],
@@ -40,15 +39,15 @@ export default function DashboardHOC() {
           hoverRadius: 10,
           radius: 5,
           backgroundColor:
-            colorArray[Math.floor(Math.random() * colorArray.length)],
-        },
+            colorArray[Math.floor(Math.random() * colorArray.length)]
+        }
       })
     );
   };
 
   const handleClick = (name: string, value: number) => {
     const target = chartState.allData.find(
-      (item) => item.school === name && item.lessons === value
+      (item: IData) => item.school === name && item.lessons === value
     );
     navigate(`/${target?.id}`);
   };
@@ -69,7 +68,7 @@ export default function DashboardHOC() {
       isDarkModeOn={essentialState?.isDarkModeOn}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <h2 className="text-2xl text-purple-500" data-testingId="Header">
+        <h2 className="text-2xl text-purple-500" data-testid="Header">
           {t("Analysis Chart")}
         </h2>
         <h3 className="text-2xl mt-10 text-purple-500">
@@ -78,7 +77,9 @@ export default function DashboardHOC() {
       </div>
       <div className="flex flex-row items-center justify-center gap-10 flex-wrap">
         <DropDown
-          data={[...new Set(chartState.allData.map((item) => item.country))]}
+          data={[
+            ...new Set(chartState.allData.map((item: IData) => item.country))
+          ]}
           type="country"
           selected={filter.country}
           label="Select Country"
@@ -86,7 +87,9 @@ export default function DashboardHOC() {
           t={t}
         />
         <DropDown
-          data={[...new Set(chartState.allData.map((item) => item.camp))]}
+          data={[
+            ...new Set(chartState.allData.map((item: IData) => item.camp))
+          ]}
           type="camp"
           selected={filter.camp}
           label="Select Camp"
@@ -96,7 +99,7 @@ export default function DashboardHOC() {
         <DropDown
           data={[
             "Show All",
-            ...new Set(chartState.allData.map((item) => item.school)),
+            ...new Set(chartState.allData.map((item: IData) => item.school))
           ]}
           type="school"
           selected={filter.school}
@@ -113,7 +116,7 @@ export default function DashboardHOC() {
         />
         <hr className="xl:w-[5px] mx-5 xl:h-[55vh] w-11/12 h-[5px] my-10 xl:my-0 bg-gray-300" />
         <div className="xl:w-3/12">
-          {/* {campLessons > 0 ? (
+          {campLessons > 0 ? (
             <div className="mb-5 capitalize">
               <span className="font-bold text-xl text-slate-700">
                 {campLessons}
@@ -125,7 +128,7 @@ export default function DashboardHOC() {
               There is no lessons provided in this camp for the selected country
               and school
             </div>
-          )} */}
+          )}
           <div className="max-h-[50vh] overflow-auto">
             <RadioButton data={schoolList} handleChange={handleChange} />
           </div>

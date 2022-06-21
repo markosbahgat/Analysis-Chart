@@ -1,6 +1,6 @@
 import React from "react";
-import { DetailsHOC } from "HOCs";
 import { useParams } from "react-router-dom";
+import { DetailsHOC } from "@/HOCs/index";
 
 export default function School() {
   const { id } = useParams<"id">();

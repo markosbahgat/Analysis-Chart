@@ -1,6 +1,6 @@
-import { classNames } from "shared";
 import { ReactNode } from "react";
-import { Toggle, LangSwitcher } from "components";
+import { classNames } from "@/shared";
+import { Toggle, LangSwitcher } from "@/components/index";
 
 interface Props {
   children: ReactNode;
@@ -11,7 +11,7 @@ interface Props {
 export default function Layout({
   children,
   themeChanger,
-  isDarkModeOn,
+  isDarkModeOn
 }: Props) {
   return (
     <main

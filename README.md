@@ -1,76 +1,46 @@
-# Analysis Chart
+# Getting Started with Create React App
 
-![](./src/assets/images/line-graph.png)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
 
-Analysis Chart is a simple project for rendering country, camp and schools data on a chart:
+## Available Scripts
 
-#### Live Demo For the Project on vercel:
+In the project directory, you can run:
 
-[![MarkosBahgata|](https://static.agilitycms.com/logos/full-logo-black-on-white-vercel_20200827182255_0.png)](http://analysis-chart-vois.vercel.app/)
+### `npm start`
 
-## Technologies used
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-- [Reactjs](https://reactjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Redux Tookit](https://redux-toolkit.js.org/)
-- [Chartjs](https://www.chartjs.org/)
-- [TailWind-Css](https://tailwindcss.com/)
-- [Cypress](https://www.cypress.io/)
-- [Sass](https://sass-lang.com/)
-- [React Hook Form](https://react-hook-form.com/)
-- [i18next](https://www.i18next.com/)
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-## Getting started
+### `npm test`
 
-- First Clone the repo:
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-```shell
-git clone https://github.com/markosbahgat/Analysis-Chart.git
-```
+### `npm run build`
 
-- Second Install the dependencies:
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-```shell
-npm install
-```
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-- it's time to start the server:
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-```shell
-npm start
-```
+### `npm run eject`
 
-Now you should see a message in the terminal like this one:
-![](./src/assets/images/terminalMessage.png)
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-## Feature set
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-This project is still in early phase, so i have many features that i can implement soon! [This demo](https://www.youtube.com/watch?v=X_zp6CodHjc&t=493s) covers a majority of features supported in this project.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-| Feature                                                                           | Status |
-| --------------------------------------------------------------------------------- | ------ |
-| Very Basic Authntication (Sign In Form)                                           | ✅     |
-| Light Mode and Dark Mode                                                          | ✅     |
-| Multi lingual Support (Arabic and English)                                        | ✅     |
-| E2E Testing                                                                       | ✅     |
-| Complete Dashboard UI                                                             | ✅     |
-| Chart That renders data coming from `data.json` file                              | ✅     |
-| Useing Local Storage to store data like (user-token, filters, current Lang..etc ) | ✅     |
-| Single Source of Truth (Redux Store)                                              | ✅     |
-| Using TypeScript For Type Checking                                                | ✅     |
-| Clean Code and Reusable Components approach are applied to the code               | ✅     |
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Project Preview (On Youtube)
+## Learn More
 
-#### Click me 👇
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-[![Watch the video](https://img.youtube.com/vi/ts8ek-UfyYc/hqdefault.jpg)](https://youtu.be/ts8ek-UfyYc)
-
-## Reach out for Markos Bahgat
-
-[![Twitter: MarkosBahgat](https://img.shields.io/twitter/follow/MarkosBahgat.svg?style=social)](https://twitter.com/bahgat_markos)
-
-> [_Portofolio Website_](https://markosbahgat.com)  
-> [_LinkedIn Profile_](https://www.linkedin.com/in/markos-bahgat-9a7178216)  
-> [_Phone Number Or WhatsApp_]() : ` +201208444364`
-> Analysis Chart is a simple project for rendering country, camp and schools data on a chart:
+To learn React, check out the [React documentation](https://reactjs.org/).

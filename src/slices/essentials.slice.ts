@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "store/rootReducer";
+import { RootState } from "@/store/rootReducer";
 
 interface EssentialsState {
   isDarkModeOn: boolean;
@@ -8,7 +8,7 @@ interface EssentialsState {
 
 const initialState: EssentialsState = {
   isDarkModeOn: false,
-  lang: "en",
+  lang: "en"
 };
 
 const essentialSlice = createSlice({
@@ -23,8 +23,8 @@ const essentialSlice = createSlice({
       { payload }: PayloadAction<string>
     ) => {
       state.lang = payload.toLowerCase();
-    },
-  },
+    }
+  }
 });
 export const { darkMode, changeLang } = essentialSlice.actions;
 export const essentialState = (state: RootState) => state.essential;
