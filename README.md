@@ -10,31 +10,31 @@ Analysis Chart is a simple project for rendering country, camp and schools data 
 
 ## Technologies used
 
--   [Reactjs](https://reactjs.org/)
--   [TypeScript](https://www.typescriptlang.org/)
--   [Redux Tookit](https://redux-toolkit.js.org/)
--   [Chartjs](https://www.chartjs.org/)
--   [TailWind-Css](https://tailwindcss.com/)
--   [Cypress](https://www.cypress.io/)
--   [Sass](https://sass-lang.com/)
--   [React Hook Form](https://react-hook-form.com/)
--   [i18next](https://www.i18next.com/)
+- [Reactjs](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Redux Tookit](https://redux-toolkit.js.org/)
+- [Chartjs](https://www.chartjs.org/)
+- [TailWind-Css](https://tailwindcss.com/)
+- [Cypress](https://www.cypress.io/)
+- [Sass](https://sass-lang.com/)
+- [React Hook Form](https://react-hook-form.com/)
+- [i18next](https://www.i18next.com/)
 
 ## Getting started
 
--   First Clone the repo:
+- First Clone the repo:
 
 ```shell
 git clone https://github.com/markosbahgat/Analysis-Chart.git
 ```
 
--   Second Install the dependencies:
+- Second Install the dependencies:
 
 ```shell
 npm install
 ```
 
--   it's time to start the server:
+- it's time to start the server:
 
 ```shell
 npm start

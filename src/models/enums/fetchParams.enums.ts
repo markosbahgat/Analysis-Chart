@@ -1,5 +1,6 @@
-export enum fetchParams {
-	limit = 300,
-	id = 1,
-	sort = '',
+enum FetchParams {
+  limit = 300,
+  id = 1,
+  sort = "",
 }
+export default FetchParams;

@@ -1,4 +1,4 @@
-import "cypress-localstorage-commands"
+import "cypress-localstorage-commands";
 
 /// <reference types="cypress" />
 // ***********************************************
