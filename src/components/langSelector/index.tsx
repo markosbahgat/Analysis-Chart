@@ -14,7 +14,7 @@ const LangSwitcher: React.FC<Props> = () => {
 				data-testid='lang-switcher'
 				id='lang'
 				name='lang'
-				className='mt-1 block  py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'
+				className='absolute right-56 top-6 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'
 				defaultValue={localStorage.getItem('Lang') ?? state.lang}
 				onChange={(e) => chLang(e.target.value)}>
 				<option value='EN'>EN</option>

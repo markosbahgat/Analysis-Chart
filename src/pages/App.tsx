@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { DashboardHOC } from 'HOCs';
-import SignIn from 'pages/signin';
 import Error404 from 'pages/404';
 import School from './[id]';
 
@@ -15,7 +14,6 @@ const App = () => {
 	return (
 		<Routes>
 			<Route path='/' element={<DashboardHOC />} />
-			<Route path='/SignIn' element={<SignIn />} />
 			<Route path='/:id' element={<School />} />
 			<Route path='*' element={<Error404 />} />
 		</Routes>

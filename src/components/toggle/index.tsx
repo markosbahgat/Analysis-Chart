@@ -12,7 +12,7 @@ const Toggle: React.FC<Props> = ({ themeChanger }) => {
 		setEnabled((enabled) => !enabled);
 	};
 	return (
-		<div className='flex flex-row items-center justify-between gap-3'>
+		<div className='absolute right-10 top-8 w-fit flex flex-row items-center justify-between gap-3'>
 			<span className='hidden md:flex'>{enabled ? 'Dark Mode' : 'Light Mode'}</span>
 			<Switch
 				checked={enabled}
