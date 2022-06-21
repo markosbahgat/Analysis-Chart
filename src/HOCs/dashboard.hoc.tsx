@@ -10,16 +10,17 @@ import { useLang, useLocal, useEssential } from "hooks";
 import useStates from "hooks/states.hook";
 
 export default function DashboardHOC() {
-  let campLessons: number = 0;
+  // let campLessons: number = 0;
   const { chartState, essentialState } = useStates();
   const { themeChanger } = useEssential();
   const { schoolList, filter } = useLocal();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const chLang = useLang();
-  schoolList.forEach((item) => {
-    campLessons += item.lessons;
-  });
+  // schoolList.forEach((item) => {
+  //   campLessons += item.lessons;
+  // });
+  // console.log(schoolList);
 
   const handleChange = (item: IData) => {
     dispatch(
@@ -112,7 +113,7 @@ export default function DashboardHOC() {
         />
         <hr className="xl:w-[5px] mx-5 xl:h-[55vh] w-11/12 h-[5px] my-10 xl:my-0 bg-gray-300" />
         <div className="xl:w-3/12">
-          {campLessons > 0 ? (
+          {/* {campLessons > 0 ? (
             <div className="mb-5 capitalize">
               <span className="font-bold text-xl text-slate-700">
                 {campLessons}
@@ -124,7 +125,7 @@ export default function DashboardHOC() {
               There is no lessons provided in this camp for the selected country
               and school
             </div>
-          )}
+          )} */}
           <div className="max-h-[50vh] overflow-auto">
             <RadioButton data={schoolList} handleChange={handleChange} />
           </div>

@@ -48,7 +48,7 @@
     "prefer-arrow-callback": "off",
     "ignorePropertyModificationsFor": "off",
     "no-param-reassign": 0,
-    "prettier/prettier": "error"
+    "no-console":"off"
   },
   "ignorePatterns": ["/cypress/**/**.{js,ts,tsx,jsx}"]
 }
