@@ -10,6 +10,6 @@ it("First Test", async () => {
         throw new Error("Function not implemented.");
       } } colorArr={[]}     />
   );
-  const DropDownElement = screen.getByText(/motherfucker/i);
+  const DropDownElement = screen.getByText(/Testid/i);
   expect(DropDownElement).toBeInTheDocument();
 });

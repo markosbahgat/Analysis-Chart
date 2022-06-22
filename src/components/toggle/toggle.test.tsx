@@ -9,6 +9,6 @@ it("First Test", async () => {
       }}
     />
   );
-  const DropDownElement = screen.getByText(/motherfucker/i);
+  const DropDownElement = screen.getByText(/Testid/i);
   expect(DropDownElement).toBeInTheDocument();
 });
