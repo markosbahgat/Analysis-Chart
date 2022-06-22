@@ -6,6 +6,11 @@ export interface FetchError {
   errorMessage: string | null;
 }
 
+/**
+ * @params this asyncAction takes 3 params which are (limit, id, sort) for filtering the coming data.
+ * @returns asyncAction should return all the data inside the data.json file.
+ */
+
 const GetChartsData = createAsyncThunk<
   IData[],
   IParams,

@@ -6,6 +6,12 @@ interface Props {
   themeChanger: () => void;
 }
 
+/**
+ * @component This is a switch button for theme switcher.
+ * @params it takes one param which is (themeChanger)
+ * @param themeChanger type callback function that takes no param () and return void.
+ * @returns This component should return JSX.Element type.
+ */
 export default function Toggle({ themeChanger }: Props) {
   const [enabled, setEnabled] = useState<boolean>(false);
   const handleChange = () => {
@@ -14,9 +20,7 @@ export default function Toggle({ themeChanger }: Props) {
   };
   return (
     <div className="absolute right-10 top-8 w-fit flex flex-row items-center justify-between gap-3">
-      <span className="hidden md:flex">
-        {enabled ? "Dark Mode" : "Light Mode"}
-      </span>
+      <span className="flex">{enabled ? "Dark Mode" : "Light Mode"}</span>
       <Switch
         checked={enabled}
         onChange={handleChange}

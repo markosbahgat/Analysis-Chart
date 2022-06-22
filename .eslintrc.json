@@ -60,5 +60,9 @@
       }
     ]
   },
-  "ignorePatterns": ["/cypress/**/**.{js,ts,tsx,jsx}", "./craco.config.js"]
+  "ignorePatterns": [
+    "/cypress/**/**.{js,ts,tsx,jsx}",
+    "./craco.config.js",
+    "src/components/**/*.test.tsx"
+  ]
 }

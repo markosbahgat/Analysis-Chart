@@ -26,18 +26,18 @@ export default function DetailsHOC({ id }: Props) {
         <div
           className={classNames(
             essentialState.isDarkModeOn ? "bg-gray-400" : "bg-gray-100",
-            "flex h-screen items-center justify-center"
+            "w-full flex h-fit min-h-screen items-center justify-center mt-20 sm:mt-0"
           )}
         >
-          <div className="w-[750px] flex flex-1 flex-col justify-center px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-            <div className=" w-full lg:w-[100%] p-10 rounded-3xl shadow-lg bg-white h-[65vh] ">
+          <div className="w-[95%] sm:w-[750px] flex flex-1 flex-col justify-center px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+            <div className=" w-full p-10 rounded-3xl shadow-lg bg-white min-h-[65vh] h-fit ">
               <div className="flex flex-col items-center justify-center">
                 <Link
                   to="/"
                   className="font-extrabold text-gray-900 text-4xl uppercase text-center"
                 >
                   <img
-                    className="h-32 w-auto m-auto"
+                    className="h-32 w-auto m-auto object-contain"
                     src="/logo.png"
                     alt="Markos"
                   />
@@ -45,7 +45,7 @@ export default function DetailsHOC({ id }: Props) {
                 <Link
                   to="/"
                   data-testid="schoolName"
-                  className="font-extrabold text-gray-900 text-4xl uppercase text-center mt-20"
+                  className="font-extrabold text-gray-900 text-2xl sm:text-4xl uppercase text-center mt-5 sm:mt-20 "
                 >
                   {targetSchool.school}
                 </Link>
@@ -60,7 +60,7 @@ export default function DetailsHOC({ id }: Props) {
 
               <div className="mt-8">
                 <div className="mt-6">
-                  <p className="text-center px-20">
+                  <p className="text-center px-5 sm:px-20">
                     This School has provided{" "}
                     <span className="font-bold text-xl text-slate-700">
                       {targetSchool.lessons}

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,5 +7,30 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: 'Barlow', sans-serif;
+}
+
+
+.scrollable-div::-webkit-scrollbar {
+  width: 8px;
+}
+
+
+.scrollable-div::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+ 
+
+.scrollable-div::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
+
+
+.scrollable-div::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }

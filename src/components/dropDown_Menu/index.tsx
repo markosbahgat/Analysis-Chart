@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
-import { TFunction } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { classNames } from "@/shared";
 
 interface Props {
@@ -10,21 +10,31 @@ interface Props {
   type: string;
   selected: string | null;
   handleChangeSelection: (item: string, type: string) => void;
-  t: TFunction<"translation", undefined>;
 }
 
+/**
+ * @component this is a simple reusable dropDown component.
+ * @params takes 4 parameters which are (data, label, type, selected, handleChangeSelection)
+ * @param data type string[].
+ * @param label type string.
+ * @param type type string.
+ * @param selected type string | null.
+ * @param handleChangeSelection type callback function that takes two params (item:string, type:string) and return void.
+ * @returns it should return a jsx.Element type of data
+ * Drop Down Filters used in the main page {Country Filter, Camp Filter, School Filter}
+ */
 export default function DropDown({
   data,
   type,
   label,
   selected,
-  handleChangeSelection,
-  t
+  handleChangeSelection
 }: Props) {
+  const { t } = useTranslation();
   return (
     <Listbox value={selected} onChange={() => null}>
       {({ open }) => (
-        <div className="flex flex-col gap-3">
+        <div className="flex sm:flex-row flex-col items-center gap-3 mb-5">
           <Listbox.Label className="block text-sm font-medium text-gray-700">
             {t(label)}
           </Listbox.Label>

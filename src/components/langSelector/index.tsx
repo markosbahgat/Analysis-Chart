@@ -3,6 +3,11 @@ import { useAppSelector } from "@/store/hooks";
 import { essentialState } from "@/slices/index";
 import { useLang } from "@/hooks/index";
 
+/**
+ * @component this is a simple reusable dropDown component used to change the selected language inside the main page.
+ * @params takes 0 parameter.
+ * @returns it should return a JSX.Element type of data
+ */
 export default function LangSwitcher() {
   const chLang = useLang();
   const state = useAppSelector(essentialState);
